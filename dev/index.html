@@ -12,27 +12,29 @@
       body { height: 100%; margin: 0; padding: 0 }
       .map-canvas { height: 100%; }
       #controls { display: none; }
-      .gm-style img {width: 50px !important;height: 50px !important;}
     </style>
   </head>
   <body>
     <div class="map-canvas" data-bind="googlemap: { stadiums: stadiums },
           infowindow: { stadium: selectedStadium, messages: datastatus }"></div>
     <div id ="controls">
-      <div id="stadium-list" class="stad-list-control" style="text-align: center;">
-        
+      <div id="stadium-list" class="stad-list-control">
+        <div id="stad-list-menu">
+          <button id="stad-list-menu-toggle" class="stad-list-menu">Search/Filters
+            <span class="fa fa-caret-down"></span></button>
+        </div>
           <div id="stad-list-hideable" class="stad-menu-offsmall">
-            <div class="search-box" style="margin-top:10px;">
-            <input type="search" placeholder="Search stadiums..." id="stadium-search" data-bind="textInput: searchtext" style="border: 1px solid;padding: 4px;border-radius: 4px;"/>
+            <div class="search-box">
+            <input type="search" placeholder="Search stadiums..." id="stadium-search" data-bind="textInput: searchtext"/><button class="search-box-clear" data-bind="click: clearSearchText"><span class="fa fa-times-circle"></span></button>
           </div>
-          <ul class="stad-list-filters" data-bind="foreach: filters" style="padding:0;list-style-type:none;">
+          <ul class="stad-list-filters" data-bind="foreach: filters">
             <li data-bind="click: $parent.toggleFilter, attr: {title: hover() }">
               <img data-bind="attr: {src: imageSrc, alt: league}" />
             </li>
           </ul>
           <div class="stad-list">
             <p class="stad-list-empty" data-bind="visible: emptysearch">No matching stadiums found.</p>
-            <ul data-bind="foreach: stadiums" class="stad-list-ul" style="list-style-type:none;padding: 0;">
+            <ul data-bind="foreach: stadiums" class="stad-list-ul">
               <li data-bind="visible: visible, click: $parent.showMarker">
                 <p data-bind="text: name" class="stad-list-name"></p>
                 <div data-bind="foreach: teams">
